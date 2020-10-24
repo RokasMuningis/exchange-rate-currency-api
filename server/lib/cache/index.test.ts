@@ -30,7 +30,7 @@ describe("Least Recently Used cache", () => {
       numberscache.write("a", 1);
       expect(numberscache.read("a")).toEqual(1);
     });
-    it("should retain pointer to old value, when equal object with different pointer is passed", () => {
+    it("should retain pointer to old value, when equal object with different ref is passed", () => {
       numberscache.write("a", { name: "John Doe" });
       const value = numberscache.read("a");
 

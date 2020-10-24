@@ -7,7 +7,7 @@ import {
   JSON_RESPONSE,
 } from "controllers/constants";
 import { params } from "lib/params";
-import { GetLatestCurrencies } from "services/get_latest_currencies";
+import { GetLatestCurrencies } from "services/getLatestCurrencies";
 import { cache } from "lib/cache";
 import { CurrenciesAPIRequest, Rates } from "types/currencies";
 import { IncomingMessage, ServerResponse } from "http";
@@ -17,7 +17,7 @@ export default async (
   req: IncomingMessage,
   res: ServerResponse
 ): Promise<void> => {
-  const data = await params<CurrenciesAPIRequest>(req);
+  const data = params<CurrenciesAPIRequest>(req);
   if (
     !data ||
     !data.base_currency ||
@@ -48,12 +48,10 @@ export default async (
 
   let currency_rates = CurrenciesCache.read(data.base_currency);
   if (!currency_rates) {
-    console.log(data.base_currency, "not in cache, retrieving...");
     const response = await GetLatestCurrencies(data.base_currency);
     CurrenciesCache.write(data.base_currency, response.rates);
     currency_rates = response.rates;
   }
-  console.log(currency_rates);
   res.writeHead(GOOD_REQUEST, JSON_RESPONSE);
   const exchange_rate = Number(currency_rates[data.quote_currency].toFixed(3));
   const quote_amount = Number(

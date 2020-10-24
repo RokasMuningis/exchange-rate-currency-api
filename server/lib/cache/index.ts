@@ -38,7 +38,7 @@ export const cache: Cache = <T>(size: number) => {
     }
 
     entry = create_entry<T>(key, value, top);
-    top!.prev = entry;
+    (top as Entry<T>).prev = entry;
     top = entry;
     remove(key);
     return set(key, entry);
@@ -53,9 +53,9 @@ export const cache: Cache = <T>(size: number) => {
       return set(key);
     }
 
-    if (!cache.has(key)) {
+    if (!cache.has(key) && top) {
       const entry = create_entry<T>(key, value, top);
-      top!.prev = entry;
+      top.prev = entry;
       top = entry;
 
       return set(key);

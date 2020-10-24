@@ -1,6 +1,6 @@
 import { createServer } from "lib/server";
-import IndexController from "controllers/index_controller";
-import QuoteController from "controllers/quote_controller";
+import IndexController from "controllers/indexController";
+import QuoteController from "controllers/quoteController";
 
 (async () => {
   const server = await createServer();

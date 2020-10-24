@@ -36,7 +36,7 @@ export const createServer = async (): Promise<Server> => {
         throw new Error(`Method "${req.method}" is not allowed.`);
       }
       const route = routesByMethod.find((listener) =>
-        listener[0].test(req.url!)
+        listener[0].test(req.url ?? '')
       );
       if (!route) {
         throw new Error(
