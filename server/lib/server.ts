@@ -17,9 +17,13 @@ interface Server {
 }
 
 export const createServer = async (): Promise<Server> => {
+  if (!process.env.SSL_KEY || !process.env.SSL_CERT) {
+    throw new Error("Certificate or Key does not exist!");
+  }
+
   const [key, cert] = await Promise.all([
-    readFile("config/cert/server.key"),
-    readFile("config/cert/server.cert"),
+    readFile(process.env.SSL_KEY),
+    readFile(process.env.SSL_CERT),
   ]);
 
   const options = { key, cert };
