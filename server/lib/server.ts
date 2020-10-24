@@ -1,9 +1,11 @@
 import * as https from "https";
 import * as fs from 'fs';
 import * as util from 'util'
+import dotenv from "dotenv";
 import { IncomingMessage, ServerResponse } from "http";
 import { app, Methods, get, post, put } from "./routes";
 
+dotenv.config();
 const readFile = util.promisify(fs.readFile);
 
 export const createServer = async () => {
