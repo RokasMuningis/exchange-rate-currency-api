@@ -21,7 +21,7 @@
     "ts-jest": "^26.4.2"
   },
   "scripts": {
-    "server": "ts-node server/index.ts",
+    "server": "ts-node -r tsconfig-paths/register server/index.ts ",
     "test": "jest",
     "lint": "eslint \"server/**/*.ts\""
   }
