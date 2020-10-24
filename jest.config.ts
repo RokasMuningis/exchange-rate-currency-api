@@ -4,6 +4,6 @@ module.exports = {
     "ts-jest": {
       isolatedModules: true,
     },
-    moduleFileExtensions: ["ts", "tsx", "js"]
+    moduleFileExtensions: ["ts", "js"]
   };
   

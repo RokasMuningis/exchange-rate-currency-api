@@ -20,7 +20,8 @@
     "ts-jest": "^26.4.2"
   },
   "scripts": {
+    "server": "ts-node server/index.ts",
     "test": "jest",
-    "lint": "eslint \"server/**/*.ts?(x)\""
+    "lint": "eslint \"server/**/*.ts\""
   }
 }
