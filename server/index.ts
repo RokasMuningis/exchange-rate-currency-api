@@ -1,10 +1,9 @@
 import { createServer } from "lib/server";
-import index_controller from "controllers/index_controller";
-import quote_controller from "controllers/quote_controller";
+import IndexController from "controllers/index_controller";
+import QuoteController from "controllers/quote_controller";
 
 (async () => {
-    const server = await createServer();            
-    server.on.get("/quote", quote_controller);
-
-    server.on.get("/", index_controller);
+  const server = await createServer();
+  server.on.get("/quote", QuoteController);
+  server.on.get("/", IndexController);
 })();

@@ -1,102 +1,102 @@
-import { Cache } from ".";
+import { cache } from ".";
 
-describe("Least Recently Used Cache", () => {
-    describe("#write()", () => {
-        let cache = Cache(2);
-        beforeEach(() => {
-            cache = Cache(2);
-        });
-        
-        it("should be able to enter entries", () => {
-            cache.write('a', 0);
-            cache.write('b', 1);
-
-            expect(cache.read('a')).toEqual(0);
-            expect(cache.read('b')).toEqual(1);
-        });
-        it("should be able to overwrite least recently used entry", () => {
-            cache.write('a', 0);
-            cache.write('b', 1);
-            cache.write('c', 2);
-
-            expect(cache.read('a')).toEqual(undefined);
-            expect(cache.read('b')).toEqual(1);
-            expect(cache.read('c')).toEqual(2);
-        });
-        it("should be able to update entry", () => {
-            cache.write('a', 0);
-            expect(cache.read('a')).toEqual(0);
-            
-            cache.write('a', 1);
-            expect(cache.read('a')).toEqual(1);
-        });
-        it("should retain pointer to old value, when equal object with different pointer is passed", () => {
-            cache.write('a', { name: 'John Doe' });
-            const value = cache.read('a');
-            
-            cache.write('a', { name: 'John Doe' });
-            expect(value).toBe(cache.read('a'));
-        });
-
-        it("should not retain pointer to old value, when override_ref argument is true", () => {
-            cache.write('a', { name: 'John Doe' });
-            const value = cache.read('a');
-            
-            cache.write('a', { name: 'John Doe' }, true);
-            expect(value).not.toBe(cache.read('a'));
-        });
+describe("Least Recently Used cache", () => {
+  describe("#write()", () => {
+    let numberscache = cache(2);
+    beforeEach(() => {
+      numberscache = cache(2);
     });
 
-    describe("#read()", () => {
-        let cache = Cache(2);
-        beforeEach(() => {
-            cache = Cache(2);
-            cache.write('a', 0);
-        });
+    it("should be able to enter entries", () => {
+      numberscache.write("a", 0);
+      numberscache.write("b", 1);
 
-        it("should retrieve value by key", () => {
-            expect(cache.read('a')).toEqual(0)
-        });
-        it("should put most recently readied value to top of stack", () => {
-            cache.write('b', 1);
-            cache.read('a');
-            cache.write('c', 2);
+      expect(numberscache.read("a")).toEqual(0);
+      expect(numberscache.read("b")).toEqual(1);
+    });
+    it("should be able to overwrite least recently used entry", () => {
+      numberscache.write("a", 0);
+      numberscache.write("b", 1);
+      numberscache.write("c", 2);
 
-            expect(cache.read('a')).toEqual(0);
-            expect(cache.read('b')).toEqual(undefined);
-            expect(cache.read('c')).toEqual(2);
-        });
+      expect(numberscache.read("a")).toEqual(undefined);
+      expect(numberscache.read("b")).toEqual(1);
+      expect(numberscache.read("c")).toEqual(2);
+    });
+    it("should be able to update entry", () => {
+      numberscache.write("a", 0);
+      expect(numberscache.read("a")).toEqual(0);
+
+      numberscache.write("a", 1);
+      expect(numberscache.read("a")).toEqual(1);
+    });
+    it("should retain pointer to old value, when equal object with different pointer is passed", () => {
+      numberscache.write("a", { name: "John Doe" });
+      const value = numberscache.read("a");
+
+      numberscache.write("a", { name: "John Doe" });
+      expect(value).toBe(numberscache.read("a"));
     });
 
-    describe("#remove()", () => {
-        let cache = Cache(2);
-        beforeEach(() => {
-            cache = Cache(2);
-        });
-        it("should be able to remove entry by key", () => {
-            cache.write('a', 0);
-            cache.write('b', 1);
-            
-            cache.remove('b')
+    it("should not retain pointer to old value, when override_ref argument is true", () => {
+      numberscache.write("a", { name: "John Doe" });
+      const value = numberscache.read("a");
 
-            expect(cache.read('a')).toEqual(0);
-            expect(cache.read('b')).toEqual(undefined);
-        });
+      numberscache.write("a", { name: "John Doe" }, true);
+      expect(value).not.toBe(numberscache.read("a"));
+    });
+  });
+
+  describe("#read()", () => {
+    let numberscache = cache(2);
+    beforeEach(() => {
+      numberscache = cache(2);
+      numberscache.write("a", 0);
     });
 
-    describe("#clear()", () => {
-        let cache = Cache(2);
-        beforeEach(() => {
-            cache = Cache(2);
-        });
-        it("should be able to clear cache", () => {
-            cache.write('a', 0);
-            cache.write('b', 1);
-
-            cache.clear();
-
-            expect(cache.read('a')).toEqual(undefined);
-            expect(cache.read('b')).toEqual(undefined);
-        });
+    it("should retrieve value by key", () => {
+      expect(numberscache.read("a")).toEqual(0);
     });
+    it("should put most recently readied value to top of stack", () => {
+      numberscache.write("b", 1);
+      numberscache.read("a");
+      numberscache.write("c", 2);
+
+      expect(numberscache.read("a")).toEqual(0);
+      expect(numberscache.read("b")).toEqual(undefined);
+      expect(numberscache.read("c")).toEqual(2);
+    });
+  });
+
+  describe("#remove()", () => {
+    let numberscache = cache(2);
+    beforeEach(() => {
+      numberscache = cache(2);
+    });
+    it("should be able to remove entry by key", () => {
+      numberscache.write("a", 0);
+      numberscache.write("b", 1);
+
+      numberscache.remove("b");
+
+      expect(numberscache.read("a")).toEqual(0);
+      expect(numberscache.read("b")).toEqual(undefined);
+    });
+  });
+
+  describe("#clear()", () => {
+    let numberscache = cache(2);
+    beforeEach(() => {
+      numberscache = cache(2);
+    });
+    it("should be able to clear cache", () => {
+      numberscache.write("a", 0);
+      numberscache.write("b", 1);
+
+      numberscache.clear();
+
+      expect(numberscache.read("a")).toEqual(undefined);
+      expect(numberscache.read("b")).toEqual(undefined);
+    });
+  });
 });
