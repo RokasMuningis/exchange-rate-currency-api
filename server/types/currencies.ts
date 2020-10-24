@@ -1,4 +1,4 @@
-enum Currencies {
+export enum Currencies {
   CAD = "CAD",
   HKD = "HKD",
   ISK = "ISK",
