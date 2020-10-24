@@ -1,7 +1,7 @@
 import { rejects } from "assert";
 import { IncomingMessage } from "http";
 import https from "https";
-import { CurrenciesAPIResponse } from "../types/currencies";
+import { CurrenciesAPIResponse } from "types/currencies";
 
 export const get_latest_currencies = (base_currency: string) => {
     return new Promise<CurrenciesAPIResponse>((resolve, reject) => {
